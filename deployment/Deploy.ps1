@@ -567,8 +567,8 @@ az webapp config set -g $ResourceGroupForDeployment -n $WebAppNamePortal --alway
 
 #endregion
 
-#region Deploy Code
-Write-host "📜 Deploy Code"
+#region Deploy Code and Database
+Write-host "📜 Deploy Code and Database"
 
 Write-host "   🔵 Deploy Database"
 Write-host "      ➡️ Generate SQL schema/data script"
@@ -597,6 +597,7 @@ Write-host "   🔵 Clean up"
 Remove-Item -Path ../src/AdminSite/appsettings.Development.json
 Remove-Item -Path script.sql
 #Remove-Item -Path ../Publish -recurse -Force
+#endregion
 
 #endregion
 
