@@ -1,0 +1,6 @@
+<step title="Incoming Request" date="2025-11-04T13:56:34.544" instance="fb67a8" url="/logstream" method="GET" type="request" pid="5304,2,45" Accept-Encoding="identity" Authorization="Bea..." Host="sac-02-portal.scm.azurewebsites.net" User-Agent="AZURECLI/2.77.0 (DEB)" x-ms-client-request-id="1162fe56-b986-11f0-b854-001c42110478" X-ARR-LOG-ID="1162fe56-b986-11f0-b854-001c42110478" CLIENT-IP="24.201.35.16:57830" X-SITE-DEPLOYMENT-ID="sac-02-portal" WAS-DEFAULT-HOSTNAME="sac-02-portal.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream" >
+  <step title="Cleanup Xml Logs" date="2025-11-04T13:56:34.544" /><!-- duration: 77ms -->
+  <step title="LogStreamHandler.BeginProcessRequest" date="2025-11-04T13:56:34.730" >
+    <step title="LockFile &apos;C:\home\site\locks\hooks.lock&apos; acquired" date="2025-11-04T13:56:34.857" /><!-- duration: 0ms -->
+    <step title="LockFile &apos;C:\home\site\locks\hooks.lock&apos; released" date="2025-11-04T13:56:34.998" /><!-- duration: 0ms -->
+  </step><!-- duration: 283ms -->

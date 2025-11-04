@@ -80,17 +80,17 @@ build-admin: check-dotnet ## Build Admin Portal
 # Package Customer Portal
 package-customer: build-customer ## Package Customer Portal into ZIP
 	@echo "$(COLOR_INFO)Packaging Customer Portal...$(COLOR_RESET)"
-	@cd $(PUBLISH_DIR) && \
-		rm -f $(CUSTOMER_ZIP) && \
-		zip -r $(CUSTOMER_ZIP) CustomerSite/ > /dev/null
+	@cd $(PUBLISH_DIR)/CustomerSite && \
+		rm -f ../$(CUSTOMER_ZIP) && \
+		zip -r ../$(CUSTOMER_ZIP) * .??* > /dev/null 2>&1 || true
 	@echo "$(COLOR_SUCCESS)✓ Customer Portal packaged: $(PUBLISH_DIR)/$(CUSTOMER_ZIP) ($$(du -h $(PUBLISH_DIR)/$(CUSTOMER_ZIP) | cut -f1))$(COLOR_RESET)"
 
 # Package Admin Portal
 package-admin: build-admin ## Package Admin Portal into ZIP
 	@echo "$(COLOR_INFO)Packaging Admin Portal...$(COLOR_RESET)"
-	@cd $(PUBLISH_DIR) && \
-		rm -f $(ADMIN_ZIP) && \
-		zip -r $(ADMIN_ZIP) AdminSite/ > /dev/null
+	@cd $(PUBLISH_DIR)/AdminSite && \
+		rm -f ../$(ADMIN_ZIP) && \
+		zip -r ../$(ADMIN_ZIP) * .??* > /dev/null 2>&1 || true
 	@echo "$(COLOR_SUCCESS)✓ Admin Portal packaged: $(PUBLISH_DIR)/$(ADMIN_ZIP) ($$(du -h $(PUBLISH_DIR)/$(ADMIN_ZIP) | cut -f1))$(COLOR_RESET)"
 
 # Deploy Customer Portal
@@ -101,7 +101,8 @@ deploy-customer: package-customer ## Deploy Customer Portal to Azure
 			--resource-group $(RESOURCE_GROUP) \
 			--name $(CUSTOMER_WEBAPP) \
 			--src-path $(CUSTOMER_ZIP) \
-			--type zip
+			--type zip \
+			--restart true
 	@echo "$(COLOR_SUCCESS)✓ Customer Portal deployed to https://$(CUSTOMER_WEBAPP).azurewebsites.net$(COLOR_RESET)"
 
 # Deploy Admin Portal
@@ -112,7 +113,8 @@ deploy-admin: package-admin ## Deploy Admin Portal to Azure
 			--resource-group $(RESOURCE_GROUP) \
 			--name $(ADMIN_WEBAPP) \
 			--src-path $(ADMIN_ZIP) \
-			--type zip
+			--type zip \
+			--restart true
 	@echo "$(COLOR_SUCCESS)✓ Admin Portal deployed to https://$(ADMIN_WEBAPP).azurewebsites.net$(COLOR_RESET)"
 
 # Deploy both portals

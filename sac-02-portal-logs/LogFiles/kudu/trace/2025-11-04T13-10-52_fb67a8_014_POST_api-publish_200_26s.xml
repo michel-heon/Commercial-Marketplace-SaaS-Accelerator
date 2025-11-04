@@ -1,0 +1,131 @@
+<step title="Incoming Request" date="2025-11-04T13:10:52.468" instance="fb67a8" url="/api/publish?type=zip" method="POST" type="request" pid="5304,2,21" Cache-Control="no-cache" Content-Length="15979514" Content-Type="application/octet-stream" Accept="*/*" Accept-Encoding="gzip, deflate" Authorization="Bea..." Host="sac-02-portal.scm.azurewebsites.net" User-Agent="AZURECLI/2.77.0 (RPM)" x-ms-client-request-id="acee27e4-b97f-11f0-b056-00155d44cd22" X-ARR-LOG-ID="acee27e4-b97f-11f0-b056-00155d44cd22" CLIENT-IP="52.190.17.9:21160" X-SITE-DEPLOYMENT-ID="sac-02-portal" WAS-DEFAULT-HOSTNAME="sac-02-portal.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/publish?type=zip" >
+  <step title="Cleanup Xml Logs" date="2025-11-04T13:10:52.484" /><!-- duration: 0ms -->
+  <step title="OneDeploy" date="2025-11-04T13:10:52.546" >
+    <step title="Starting PushDeployAsync" date="2025-11-04T13:10:52.562" /><!-- duration: 16ms -->
+    <step title="Updating shutdown sentinel last write time" date="2025-11-04T13:10:52.687" SemaphoreCount="7" /><!-- duration: 0ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; acquired" date="2025-11-04T13:10:52.703" /><!-- duration: 16ms -->
+    <step title="Saving request content to C:\local\Temp\zipdeploy\ezbhgzgv.zip" date="2025-11-04T13:10:52.718" >
+      <step title="Total 15,979,514 bytes written to C:\local\Temp\zipdeploy\ezbhgzgv.zip" date="2025-11-04T13:10:53.203" /><!-- duration: 0ms -->
+    </step><!-- duration: 500ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; released" date="2025-11-04T13:10:53.218" /><!-- duration: 16ms -->
+    <step title="Deleting shutdown sentinel file" date="2025-11-04T13:10:53.249" SemaphoreCount="8" /><!-- duration: 0ms -->
+    <step title="Starting FetchDeploy" date="2025-11-04T13:10:53.249" /><!-- duration: 16ms -->
+    <step title="Attempting to fetch target branch HEAD" date="2025-11-04T13:10:53.265" /><!-- duration: 16ms -->
+    <step title="Updating shutdown sentinel last write time" date="2025-11-04T13:10:53.328" SemaphoreCount="7" /><!-- duration: 16ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; acquired" date="2025-11-04T13:10:53.374" /><!-- duration: 20ms -->
+    <step title="Performing fetch based deployment" date="2025-11-04T13:10:53.406" >
+      <step title="Creating temporary deployment" date="2025-11-04T13:10:53.424" /><!-- duration: 81ms -->
+      <step title="Fetching changes." date="2025-11-04T13:10:53.609" /><!-- duration: 0ms -->
+      <step title="Starting LocalZipHandler" date="2025-11-04T13:10:53.625" /><!-- duration: 0ms -->
+      <step title="Starting LocalZipFetch" date="2025-11-04T13:10:53.640" /><!-- duration: 0ms -->
+      <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\ezbhgzgv.zip (15.24 MB) to C:\local\Temp\zipdeploy\extracted" date="2025-11-04T13:10:53.656" /><!-- duration: 0ms -->
+      <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\ezbhgzgv.zip (15.24 MB) to C:\local\Temp\zipdeploy\extracted" date="2025-11-04T13:10:53.671" >
+        <step title="Renaming extractTargetDirectory(C:\local\Temp\zipdeploy\extracted) to tempDirectory(C:\local\Temp\zipdeploy\ic1zdssh.5hg)" date="2025-11-04T13:10:53.671" /><!-- duration: 16ms -->
+        <step title="Extracting 225 entries to C:\local\Temp\zipdeploy\extracted directory" date="2025-11-04T13:10:54.048" >
+          <step title="Extracting to C:\local\Temp\zipdeploy\extracted\CustomerSite\Azure.Core.dll ..." date="2025-11-04T13:10:54.078" /><!-- duration: 81ms -->
+          <step title="Extracting to C:\local\Temp\zipdeploy\extracted\CustomerSite\wwwroot\lib\jquery\dist\jquery.min.js ..." date="2025-11-04T13:10:54.189" /><!-- duration: 14ms -->
+          <step title="Extracting to C:\local\Temp\zipdeploy\extracted\CustomerSite\wwwroot\lib\jquery\dist\jquery.js ..." date="2025-11-04T13:10:54.203" /><!-- duration: 16ms -->
+          <step title="Extracting to C:\local\Temp\zipdeploy\extracted\CustomerSite\wwwroot\lib\jquery\dist\jquery.min.map ..." date="2025-11-04T13:10:54.234" /><!-- duration: 16ms -->
+          <step title="Extracting to C:\local\Temp\zipdeploy\extracted\CustomerSite\wwwroot\lib\jquery\LICENSE.txt ..." date="2025-11-04T13:10:54.281" /><!-- duration: 0ms -->
+          <step title="Omitting extracting file traces ..." date="2025-11-04T13:10:54.312" /><!-- duration: 0ms -->
+        </step><!-- duration: 3391ms -->
+      </step><!-- duration: 3909ms -->
+      <step title="None repository commit" date="2025-11-04T13:10:57.593" >
+        <step title="Commit id: 579e778b01274659a3a70acedd293dd0" date="2025-11-04T13:10:57.609" Message="OneDeploy" AuthorName="N/A" AuthorEmail="N/A" /><!-- duration: 0ms -->
+      </step><!-- duration: 16ms -->
+      <step title="Before sending BuildRequestReceived status to /api/updatedeploystatus" date="2025-11-04T13:10:57.609" /><!-- duration: 16ms -->
+      <step title="DeploymentManager.Deploy(id:579e778b01274659a3a70acedd293dd0)" date="2025-11-04T13:10:57.624" >
+        <step title="Collecting changeset information" date="2025-11-04T13:10:57.640" /><!-- duration: 78ms -->
+        <step title="Updating submodules" date="2025-11-04T13:10:57.734" >
+          <step title="Updating submodules." date="2025-11-04T13:10:57.796" /><!-- duration: 16ms -->
+        </step><!-- duration: 99ms -->
+        <step title="Preparing deployment for commit id &apos;579e778b01&apos;." date="2025-11-04T13:10:57.893" /><!-- duration: 0ms -->
+        <step title="Determining deployment builder" date="2025-11-04T13:10:57.984" >
+          <step title="Builder is OneDeployBuilder" date="2025-11-04T13:10:58.004" /><!-- duration: 11ms -->
+        </step><!-- duration: 31ms -->
+        <step title="Copying SSH keys" date="2025-11-04T13:10:58.046" /><!-- duration: 16ms -->
+        <step title="Building" date="2025-11-04T13:10:58.062" >
+          <step title="Running build. Project type: OneDeploy" date="2025-11-04T13:10:58.128" /><!-- duration: 12ms -->
+          <step title="Copying the manifest" date="2025-11-04T13:10:58.218" /><!-- duration: 0ms -->
+          <step title="Clean deploying to C:\home\site\wwwroot" date="2025-11-04T13:10:58.421" /><!-- duration: 0ms -->
+          <step title="Generating deployment script." date="2025-11-04T13:10:58.516" /><!-- duration: 20ms -->
+          <step title="Generating deployment script" date="2025-11-04T13:10:58.546" >
+            <step title="Using cached version of the deployment script for command: -y --no-dot-deployment -r &quot;C:\local\Temp\zipdeploy\extracted&quot; -o &quot;C:\home\site\deployments\tools&quot; --basic --sitePath &quot;C:\local\Temp\zipdeploy\extracted&quot;" date="2025-11-04T13:10:58.609" /><!-- duration: 16ms -->
+            <step title="Using cached version of deployment script (command: &apos;azure -y --no-dot-deployment -r &quot;C:\local\Temp\zipdeploy\extracted&quot; -o &quot;C:\home\site\deployments\tools&quot; --basic --sitePath &quot;C:\local\Temp\zipdeploy\extracted&quot;&apos;)." date="2025-11-04T13:10:58.640" /><!-- duration: 0ms -->
+          </step><!-- duration: 110ms -->
+          <step title="Running deployment command..." date="2025-11-04T13:10:58.718" /><!-- duration: 16ms -->
+          <step title="Command: &quot;C:\home\site\deployments\tools\deploy.cmd&quot;" date="2025-11-04T13:10:58.749" /><!-- duration: 16ms -->
+          <step title="Executing external process" date="2025-11-04T13:10:58.781" type="process" path="starter.cmd" arguments="&quot;C:\home\site\deployments\tools\deploy.cmd&quot;" >
+            <step title="Handling Basic Web Site deployment." date="2025-11-04T13:10:59.473" /><!-- duration: 11ms -->
+            <step title="Creating app_offline.htm" date="2025-11-04T13:11:01.756" /><!-- duration: 20ms -->
+            <step title="KuduSync.NET from: &apos;C:\local\Temp\zipdeploy\extracted&apos; to: &apos;C:\home\site\wwwroot&apos;" date="2025-11-04T13:11:01.836" /><!-- duration: 12ms -->
+            <step title="Deleting file: &apos;cs\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:01.896" /><!-- duration: 0ms -->
+            <step title="Deleting file: &apos;cs\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:01.957" /><!-- duration: 19ms -->
+            <step title="Deleting directory: &apos;cs&apos;" date="2025-11-04T13:11:02.037" /><!-- duration: 30ms -->
+            <step title="Deleting file: &apos;de\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:02.116" /><!-- duration: 13ms -->
+            <step title="Deleting file: &apos;de\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:02.197" /><!-- duration: 10ms -->
+            <step title="Deleting file: &apos;de\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:02.257" /><!-- duration: 30ms -->
+            <step title="Deleting directory: &apos;de&apos;" date="2025-11-04T13:11:02.348" /><!-- duration: 19ms -->
+            <step title="Deleting file: &apos;es\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:02.458" /><!-- duration: 31ms -->
+            <step title="Deleting file: &apos;es\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:02.568" /><!-- duration: 0ms -->
+            <step title="Deleting file: &apos;es\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:02.648" /><!-- duration: 30ms -->
+            <step title="Deleting directory: &apos;es&apos;" date="2025-11-04T13:11:02.880" /><!-- duration: 20ms -->
+            <step title="Deleting file: &apos;fr\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:02.942" /><!-- duration: 19ms -->
+            <step title="Deleting file: &apos;fr\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:03.082" /><!-- duration: 19ms -->
+            <step title="Deleting file: &apos;fr\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:03.145" /><!-- duration: 17ms -->
+            <step title="Deleting directory: &apos;fr&apos;" date="2025-11-04T13:11:03.332" /><!-- duration: 20ms -->
+            <step title="Deleting file: &apos;it\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:03.395" /><!-- duration: 18ms -->
+            <step title="Deleting file: &apos;it\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:03.443" /><!-- duration: 30ms -->
+            <step title="Deleting file: &apos;it\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:03.695" /><!-- duration: 12ms -->
+            <step title="Deleting directory: &apos;it&apos;" date="2025-11-04T13:11:03.745" /><!-- duration: 10ms -->
+            <step title="Deleting file: &apos;ja\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:03.770" /><!-- duration: 0ms -->
+            <step title="Deleting file: &apos;ja\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:03.866" /><!-- duration: 13ms -->
+            <step title="Deleting file: &apos;ja\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:03.926" /><!-- duration: 16ms -->
+            <step title="Deleting directory: &apos;ja&apos;" date="2025-11-04T13:11:03.988" /><!-- duration: 18ms -->
+            <step title="Deleting file: &apos;ko\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:04.020" /><!-- duration: 16ms -->
+            <step title="Deleting file: &apos;ko\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:04.067" /><!-- duration: 0ms -->
+            <step title="Deleting file: &apos;ko\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:04.147" /><!-- duration: 60ms -->
+            <step title="Deleting directory: &apos;ko&apos;" date="2025-11-04T13:11:04.258" /><!-- duration: 43ms -->
+            <step title="Deleting file: &apos;pl\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:04.369" /><!-- duration: 10ms -->
+            <step title="Deleting file: &apos;pl\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:04.442" /><!-- duration: 18ms -->
+            <step title="Deleting directory: &apos;pl&apos;" date="2025-11-04T13:11:04.942" /><!-- duration: 20ms -->
+            <step title="Deleting file: &apos;pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:05.004" /><!-- duration: 18ms -->
+            <step title="Deleting file: &apos;pt-BR\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:05.113" /><!-- duration: 20ms -->
+            <step title="Deleting file: &apos;pt-BR\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:06.129" /><!-- duration: 503ms -->
+            <step title="Deleting directory: &apos;pt-BR&apos;" date="2025-11-04T13:11:07.677" /><!-- duration: 161ms -->
+            <step title="Deleting file: &apos;ru\Microsoft.CodeAnalysis.CSharp.resources.dll&apos;" date="2025-11-04T13:11:08.520" /><!-- duration: 471ms -->
+            <step title="Deleting file: &apos;ru\Microsoft.CodeAnalysis.resources.dll&apos;" date="2025-11-04T13:11:09.664" /><!-- duration: 12ms -->
+            <step title="Deleting file: &apos;ru\Microsoft.Data.SqlClient.resources.dll&apos;" date="2025-11-04T13:11:09.785" /><!-- duration: 110ms -->
+            <step title="Deleting directory: &apos;ru&apos;" date="2025-11-04T13:11:09.957" /><!-- duration: 31ms -->
+            <step title="Deleting file: &apos;runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll&apos;" date="2025-11-04T13:11:10.598" /><!-- duration: 31ms -->
+            <step title="Deleting directory: &apos;runtimes\browser\lib\net8.0&apos;" date="2025-11-04T13:11:10.692" /><!-- duration: 17ms -->
+            <step title="Deleting directory: &apos;runtimes\browser\lib&apos;" date="2025-11-04T13:11:10.789" /><!-- duration: 12ms -->
+            <step title="Deleting directory: &apos;runtimes\browser&apos;" date="2025-11-04T13:11:10.832" /><!-- duration: 17ms -->
+            <step title="Deleting file: &apos;runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll&apos;" date="2025-11-04T13:11:10.880" /><!-- duration: 0ms -->
+            <step title="Deleting directory: &apos;runtimes\unix\lib\net8.0&apos;" date="2025-11-04T13:11:10.990" /><!-- duration: 14ms -->
+            <step title="Deleting directory: &apos;runtimes\unix\lib&apos;" date="2025-11-04T13:11:11.051" /><!-- duration: 31ms -->
+            <step title="Deleting directory: &apos;runtimes\unix&apos;" date="2025-11-04T13:11:11.114" /><!-- duration: 0ms -->
+            <step title="Deleting file: &apos;runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll&apos;" date="2025-11-04T13:11:11.161" /><!-- duration: 0ms -->
+            <step title="Deleting file: &apos;runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll&apos;" date="2025-11-04T13:11:11.192" /><!-- duration: 20ms -->
+            <step title="Omitting next output lines..." date="2025-11-04T13:11:11.241" /><!-- duration: 28ms -->
+            <step title="Finished successfully." date="2025-11-04T13:11:17.159" /><!-- duration: 17ms -->
+          </step><!-- duration: 18425ms -->
+          <step title="Build completed succesfully." date="2025-11-04T13:11:17.315" /><!-- duration: 0ms -->
+          <step title="Running post deployment command(s)..." date="2025-11-04T13:11:17.378" /><!-- duration: 16ms -->
+          <step title="Requesting site restart" date="2025-11-04T13:11:17.487" /><!-- duration: 20ms -->
+          <step title="Requesting site restart" date="2025-11-04T13:11:17.518" /><!-- duration: 16ms -->
+          <step title="Requesting site restart. Attempt #1" date="2025-11-04T13:11:17.581" /><!-- duration: 16ms -->
+          <step title="Requesting site restart. Attempt #1" date="2025-11-04T13:11:17.597" /><!-- duration: 16ms -->
+          <step title="Successfully requested a restart. Attempt #1" date="2025-11-04T13:11:18.018" /><!-- duration: 0ms -->
+          <step title="Successfully requested a restart. Attempt #1" date="2025-11-04T13:11:18.034" /><!-- duration: 16ms -->
+          <step title="Deployment successful. DEPLOYMENTINFO: deploymentPath = OneDeploy, deployer = OneDeploy, os = windows, sku = Basic, siteName = sac-02-portal, siteHostName = sac-02-portal.azurewebsites.net, deploymentStatus = Success" date="2025-11-04T13:11:18.128" /><!-- duration: 0ms -->
+        </step><!-- duration: 20300ms -->
+      </step><!-- duration: 20738ms -->
+      <step title="Cleaning up temp files" date="2025-11-04T13:11:18.378" /><!-- duration: 0ms -->
+      <step title="Skip function trigger and logicapp sync because function is not enabled." date="2025-11-04T13:11:18.393" /><!-- duration: 0ms -->
+    </step><!-- duration: 25066ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; released" date="2025-11-04T13:11:18.487" /><!-- duration: 16ms -->
+    <step title="Deleting shutdown sentinel file" date="2025-11-04T13:11:18.523" SemaphoreCount="8" /><!-- duration: 11ms -->
+  </step><!-- duration: 25988ms -->
+  <step title="Outgoing response" date="2025-11-04T13:11:18.534" type="response" statusCode="200" statusText="OK" Server="Microsoft-IIS/10.0" x-ms-request-id="acee27e4-b97f-11f0-b056-00155d44cd22" Cache-Control="private" X-AspNet-Version="4.0.30319" /><!-- duration: 16ms -->
+</step><!-- duration: 26081ms -->
