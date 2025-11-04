@@ -1,5 +1,5 @@
 #!/bin/bash
-cd Commercial-Marketplace-SaaS-Accelerator
+cd /home/michel/Commercial-Marketplace-SaaS-Accelerator
 
 # Étape 1: Build le Customer Portal avec le code de debug
 cd src/CustomerSite
