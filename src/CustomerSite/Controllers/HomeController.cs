@@ -219,6 +219,13 @@ public class HomeController : BaseController
             this.applicationConfigService.SaveFileToDisk("LogoFile", "contoso-sales.png");
             this.applicationConfigService.SaveFileToDisk("FaviconFile", "favicon.ico");
 
+            // Redirect to login if not authenticated
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                this.logger.Info("User not authenticated, redirecting to login");
+                return Challenge(new AuthenticationProperties { RedirectUri = "/Home/Index" + (string.IsNullOrEmpty(token) ? "" : $"?token={token}") });
+            }
+
             if (this.User.Identity.IsAuthenticated)
             {
                 var userId = this.userService.AddUser(this.GetCurrentUserDetail());
