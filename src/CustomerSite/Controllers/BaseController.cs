@@ -24,8 +24,7 @@ public class BaseController : Controller
     public BaseController(IAppVersionService appVersionService)
     {
         _appVersionService = appVersionService;
-        // Authentication is handled by Azure App Service Authentication
-        // this.CheckAuthentication();
+        this.CheckAuthentication();
     }
 
     public override void OnActionExecuting(ActionExecutingContext context)
