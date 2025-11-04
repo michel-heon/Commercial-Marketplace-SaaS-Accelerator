@@ -1,3 +1,0 @@
-<step title="Begin HttpPost https://sac-02-portal.scm.azurewebsites.net/api/app/restart, x-ms-request-id: acee27e4-b97f-11f0-b056-00155d44cd22" date="2025-11-04T13:11:17.643" instance="fb67a8" >
-  <step title="Cleanup Xml Logs" date="2025-11-04T13:11:17.675" /><!-- duration: 38ms -->
-</step><!-- duration: 79ms -->
