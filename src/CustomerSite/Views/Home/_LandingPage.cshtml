@@ -189,6 +189,16 @@
                 </div>
 
                 @* Section Installation Teams - Visible uniquement pour abonnements actifs *@
+                @* DEBUG: Remove after testing *@
+                <div style="background-color: #ffffcc; border: 2px solid #ff9800; padding: 15px; margin: 20px 0;">
+                    <h4 style="color: #d32f2f; margin-top: 0;">🔍 DEBUG INFO (à supprimer après test)</h4>
+                    <p><strong>Model is null:</strong> @(Model == null)</p>
+                    <p><strong>SubscriptionStatus value:</strong> @Model?.SubscriptionStatus</p>
+                    <p><strong>Expected value:</strong> @SubscriptionStatusEnumExtension.Subscribed</p>
+                    <p><strong>Comparison result:</strong> @(Model?.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed)</p>
+                    <p><strong>Subscription Name:</strong> @Model?.CustomerName</p>
+                </div>
+                
                 @if (Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed)
                 {
                     <div class="text-white mt-4">
