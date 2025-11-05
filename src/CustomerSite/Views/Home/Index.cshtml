@@ -1,5 +1,15 @@
 ﻿@model Marketplace.SaaS.Accelerator.Services.Models.SubscriptionResultExtension
 
+@{
+    // Log pour debug
+    System.Diagnostics.Debug.WriteLine($"[INDEX-VIEW-DEBUG] Model is null: {Model == null}");
+    if (Model != null)
+    {
+        System.Diagnostics.Debug.WriteLine($"[INDEX-VIEW-DEBUG] Model.SubscriptionStatus: {Model.SubscriptionStatus}");
+        System.Diagnostics.Debug.WriteLine($"[INDEX-VIEW-DEBUG] Model.ShowWelcomeScreen: {Model.ShowWelcomeScreen}");
+    }
+}
+
 <div id="divIndex">
     @await Html.PartialAsync("_LandingPage", Model)
 </div>
