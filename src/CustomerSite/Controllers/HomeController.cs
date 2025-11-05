@@ -283,7 +283,7 @@ public class HomeController : BaseController
                     // NO TOKEN - Check if user has existing subscriptions
                     this.logger.Info($"[HOME-INDEX] No token present - checking for existing subscriptions for user: {this.CurrentUserEmailAddress}");
                     
-                    var userIdFromEmail = this.userService.GetPartnerDetailFromEmail(this.CurrentUserEmailAddress);
+                    var userIdFromEmail = this.userRepository.GetPartnerDetailFromEmail(this.CurrentUserEmailAddress);
                     this.logger.Info($"[HOME-INDEX] GetPartnerDetailFromEmail returned: {(userIdFromEmail != null ? $"UserId={userIdFromEmail.UserId}, Email={userIdFromEmail.EmailAddress}" : "NULL")}");
                     
                     if (userIdFromEmail != null && userIdFromEmail.UserId > 0)
