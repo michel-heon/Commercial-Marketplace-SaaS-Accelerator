@@ -234,6 +234,7 @@ public class HomeController : BaseController
             
             this.logger.Info("[AUTH-DEBUG] User authenticated, proceeding with subscription loading");
 
+            int currentUserId = 0;
             if (this.User.Identity.IsAuthenticated)
             {
                 try
@@ -244,7 +245,7 @@ public class HomeController : BaseController
                     var userId = this.userService.AddUser(this.GetCurrentUserDetail());
                     this.logger.Info($"[AUTH-DEBUG] User added/retrieved, userId: {userId}");
                     
-                    var currentUserId = this.userService.GetUserIdFromEmailAddress(this.CurrentUserEmailAddress);
+                    currentUserId = this.userService.GetUserIdFromEmailAddress(this.CurrentUserEmailAddress);
                     this.logger.Info($"[AUTH-DEBUG] currentUserId from email: {currentUserId}");
                     
                     this.subscriptionService = new SubscriptionService(this.subscriptionRepository, this.planRepository, userId);
@@ -259,7 +260,7 @@ public class HomeController : BaseController
                 this.logger.Info("User authenticated successfully");
                 if (!string.IsNullOrEmpty(token))
                 {
-                    this.logger.Info($"[AUTH-DEBUG] Processing token: {token?.Substring(0, Math.Min(10, token.Length ?? 0))}...");
+                    this.logger.Info($"[AUTH-DEBUG] Processing token: {token.Substring(0, Math.Min(10, token.Length))}...");
                     this.TempData["ShowWelcomeScreen"] = null;
                     token = token.Replace(' ', '+');
                     var newSubscription = await this.apiService.ResolveAsync(token).ConfigureAwait(false);
@@ -339,7 +340,7 @@ public class HomeController : BaseController
 
             this.logger.Info("[AUTH-DEBUG] Returning final view with subscription extension");
             this.logger.Info($"[AUTH-DEBUG] SubscriptionExtension.ShowWelcomeScreen: {subscriptionExtension.ShowWelcomeScreen}");
-            this.logger.Info($"[AUTH-DEBUG] SubscriptionExtension.SubscriptionId: {subscriptionExtension.SubscriptionId}");
+            this.logger.Info($"[AUTH-DEBUG] SubscriptionExtension.Id: {subscriptionExtension.Id}");
             this.logger.Info($"[AUTH-DEBUG] SubscriptionExtension.SubscriptionStatus: {subscriptionExtension.SubscriptionStatus}");
             return this.View(subscriptionExtension);
         }
