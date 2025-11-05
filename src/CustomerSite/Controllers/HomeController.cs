@@ -213,54 +213,20 @@ public class HomeController : BaseController
         try
         {
             this.logger.Info(HttpUtility.HtmlEncode($"Landing page with token {token}"));
-            this.logger.Info($"[AUTH-DEBUG] User.Identity.IsAuthenticated: {this.User.Identity.IsAuthenticated}");
-            this.logger.Info($"[AUTH-DEBUG] User.Identity.Name: {this.User.Identity?.Name ?? "NULL"}");
-            this.logger.Info($"[AUTH-DEBUG] User.Identity.AuthenticationType: {this.User.Identity?.AuthenticationType ?? "NULL"}");
-            
             SubscriptionResult subscriptionDetail = new SubscriptionResult();
             SubscriptionResultExtension subscriptionExtension = new SubscriptionResultExtension();
 
             this.applicationConfigService.SaveFileToDisk("LogoFile", "contoso-sales.png");
             this.applicationConfigService.SaveFileToDisk("FaviconFile", "favicon.ico");
 
-            // Redirect to login if not authenticated
-            if (!this.User.Identity.IsAuthenticated)
-            {
-                this.logger.Info("[AUTH-DEBUG] User not authenticated, redirecting to login");
-                return Challenge(new AuthenticationProperties { RedirectUri = "/Home/Index" + (string.IsNullOrEmpty(token) ? "" : $"?token={token}") });
-            }
-            
-            this.logger.Info("[AUTH-DEBUG] User authenticated, proceeding with subscription loading");
-            
-            this.logger.Info("[AUTH-DEBUG] User authenticated, proceeding with subscription loading");
-
-            int currentUserId = 0;
             if (this.User.Identity.IsAuthenticated)
             {
-                try
-                {
-                    this.logger.Info($"[AUTH-DEBUG] CurrentUserEmailAddress: {this.CurrentUserEmailAddress ?? "NULL"}");
-                    this.logger.Info($"[AUTH-DEBUG] CurrentUserName: {this.CurrentUserName ?? "NULL"}");
-                    
-                    var userId = this.userService.AddUser(this.GetCurrentUserDetail());
-                    this.logger.Info($"[AUTH-DEBUG] User added/retrieved, userId: {userId}");
-                    
-                    currentUserId = this.userService.GetUserIdFromEmailAddress(this.CurrentUserEmailAddress);
-                    this.logger.Info($"[AUTH-DEBUG] currentUserId from email: {currentUserId}");
-                    
-                    this.subscriptionService = new SubscriptionService(this.subscriptionRepository, this.planRepository, userId);
-                    this.logger.Info("[AUTH-DEBUG] SubscriptionService initialized");
-                }
-                catch (Exception userEx)
-                {
-                    this.logger.LogError($"[AUTH-DEBUG] Error in user setup: {userEx.Message} :: {userEx.StackTrace}");
-                    throw;
-                }
-                
+                var userId = this.userService.AddUser(this.GetCurrentUserDetail());
+                var currentUserId = this.userService.GetUserIdFromEmailAddress(this.CurrentUserEmailAddress);
+                this.subscriptionService = new SubscriptionService(this.subscriptionRepository, this.planRepository, userId);
                 this.logger.Info("User authenticated successfully");
                 if (!string.IsNullOrEmpty(token))
                 {
-                    this.logger.Info($"[AUTH-DEBUG] Processing token: {token.Substring(0, Math.Min(10, token.Length))}...");
                     this.TempData["ShowWelcomeScreen"] = null;
                     token = token.Replace(' ', '+');
                     var newSubscription = await this.apiService.ResolveAsync(token).ConfigureAwait(false);
@@ -312,16 +278,13 @@ public class HomeController : BaseController
                 }
                 else
                 {
-                    this.logger.Info("[AUTH-DEBUG] No token provided, showing welcome screen");
                     this.TempData["ShowWelcomeScreen"] = "True";
                     subscriptionExtension.ShowWelcomeScreen = true;
-                    this.logger.Info("[AUTH-DEBUG] Returning view with ShowWelcomeScreen=true");
                     return this.View(subscriptionExtension);
                 }
             }
             else
             {
-                this.logger.Info("[AUTH-DEBUG] User NOT authenticated (else branch - should not happen)");
                 if (!string.IsNullOrEmpty(token))
                 {
                     return this.Challenge(
@@ -338,15 +301,11 @@ public class HomeController : BaseController
                 }
             }
 
-            this.logger.Info("[AUTH-DEBUG] Returning final view with subscription extension");
-            this.logger.Info($"[AUTH-DEBUG] SubscriptionExtension.ShowWelcomeScreen: {subscriptionExtension.ShowWelcomeScreen}");
-            this.logger.Info($"[AUTH-DEBUG] SubscriptionExtension.Id: {subscriptionExtension.Id}");
-            this.logger.Info($"[AUTH-DEBUG] SubscriptionExtension.SubscriptionStatus: {subscriptionExtension.SubscriptionStatus}");
             return this.View(subscriptionExtension);
         }
         catch (Exception ex)
         {
-            this.logger.LogError($"[AUTH-DEBUG] EXCEPTION in Index: Message:{ex.Message} :: InnerException: {ex.InnerException?.Message} :: StackTrace: {ex.StackTrace}");
+            this.logger.LogError($"Message:{ex.Message} :: {ex.InnerException}   ");
             return this.View("Error", ex);
         }
     }
