@@ -2,9 +2,18 @@
 
 @using Marketplace.SaaS.Accelerator.Services.Models
 @model Marketplace.SaaS.Accelerator.Services.Models.SubscriptionResultExtension
+@inject Microsoft.Extensions.Logging.ILogger<object> Logger
 
 @{
     ViewData["Title"] = "Home";
+}
+@{
+    Logger.LogInformation($"[LANDING-PAGE-START] Rendering Landing Page");
+    Logger.LogInformation($"[LANDING-PAGE] Model is null: {Model == null}");
+    if (Model != null) {
+        Logger.LogInformation($"[LANDING-PAGE] ShowWelcomeScreen = {Model.ShowWelcomeScreen}");
+        Logger.LogInformation($"[LANDING-PAGE] SubscriptionStatus = '{Model.SubscriptionStatus}'");
+    }
 }
 @if (!Model.ShowWelcomeScreen)
 {
@@ -189,7 +198,18 @@
                 </div>
 
             @* Section Installation Teams - Visible uniquement pour abonnements actifs *@
-            @if (Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed)
+            @{
+    var isSubscribed = Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed;
+    Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] Checking Installation section condition");
+    Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] SubscriptionStatus = '{Model.SubscriptionStatus}'");
+    Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] Condition (SubscriptionStatus == Subscribed): {isSubscribed}");
+    if (isSubscribed) {
+        Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] ✓ WILL RENDER Installation section");
+    } else {
+        Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] ✗ WILL NOT RENDER Installation section (Status is: '{Model.SubscriptionStatus}')");
+    }
+}
+@if (Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed)
             {
                 <div class="text-white mt-4">
                     <span class="cm-section-heading">Installation de l'application Teams</span>
@@ -259,7 +279,18 @@
             }
 
                 <div class="text-end">
-                    @if (Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed)
+                    @{
+    var isSubscribed = Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed;
+    Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] Checking Installation section condition");
+    Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] SubscriptionStatus = '{Model.SubscriptionStatus}'");
+    Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] Condition (SubscriptionStatus == Subscribed): {isSubscribed}");
+    if (isSubscribed) {
+        Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] ✓ WILL RENDER Installation section");
+    } else {
+        Logger.LogInformation($"[LANDING-PAGE-INSTALLATION] ✗ WILL NOT RENDER Installation section (Status is: '{Model.SubscriptionStatus}')");
+    }
+}
+@if (Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed)
                     {
                         <button type="submit" asp-action="SubscriptionOperation" asp-route-subscriptionId="@Model.Id" asp-route-planId="@Model.PlanId" asp-route-operation="Deactivate" class="cm-button-danger text-right">Unsubscribe</button>
                         <button type="submit" asp-action="Subscriptions" class="cm-button-default text-end">Go to Subscription List</button>

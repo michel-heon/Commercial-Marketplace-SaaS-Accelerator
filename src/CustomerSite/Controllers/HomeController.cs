@@ -212,6 +212,8 @@ public class HomeController : BaseController
     {
         try
         {
+            this.logger.Info($"[HOME-INDEX-START] Token present: {!string.IsNullOrEmpty(token)}, User authenticated: {this.User.Identity.IsAuthenticated}");
+            this.logger.Info($"[HOME-INDEX-START] User email: {this.CurrentUserEmailAddress}");
             this.logger.Info(HttpUtility.HtmlEncode($"Landing page with token {token}"));
             SubscriptionResult subscriptionDetail = new SubscriptionResult();
             SubscriptionResultExtension subscriptionExtension = new SubscriptionResultExtension();
@@ -280,6 +282,7 @@ public class HomeController : BaseController
                 {
                     this.TempData["ShowWelcomeScreen"] = "True";
                     subscriptionExtension.ShowWelcomeScreen = true;
+                    this.logger.Info($"[HOME-INDEX-END] Authenticated but no token - returning welcome screen. SubscriptionStatus = {subscriptionExtension.SubscriptionStatus}");
                     return this.View(subscriptionExtension);
                 }
             }
@@ -297,10 +300,12 @@ public class HomeController : BaseController
                 {
                     this.TempData["ShowWelcomeScreen"] = "True";
                     subscriptionExtension.ShowWelcomeScreen = true;
+                    this.logger.Info($"[HOME-INDEX-END] Authenticated but no token - returning welcome screen. SubscriptionStatus = {subscriptionExtension.SubscriptionStatus}");
                     return this.View(subscriptionExtension);
                 }
             }
 
+            this.logger.Info($"[HOME-INDEX-END] Returning Model. ShowWelcomeScreen = {subscriptionExtension.ShowWelcomeScreen}, SubscriptionStatus = {subscriptionExtension.SubscriptionStatus}");
             return this.View(subscriptionExtension);
         }
         catch (Exception ex)
