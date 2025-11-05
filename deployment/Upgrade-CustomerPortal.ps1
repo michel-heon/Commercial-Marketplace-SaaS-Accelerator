@@ -37,6 +37,52 @@ if ($response -ne 'Y' -and $response -ne 'y') {
 Write-Host "Thank you for agreeing. Proceeding with the Customer Portal deployment..." -ForegroundColor Green
 Write-Host ""
 
+# ============================================================================
+# Check and Install .NET 8.0 SDK if needed
+# ============================================================================
+Write-Host "## Checking .NET 8.0 SDK..." -ForegroundColor Yellow
+
+# Check if .NET 8.0 is installed
+$dotnetVersion = dotnet --list-sdks | Select-String "^8\.0\."
+
+if (-not $dotnetVersion) {
+    Write-Host "⚠️  .NET 8.0 SDK not found. Installing..." -ForegroundColor Yellow
+    Write-Host ""
+    
+    # Download and install .NET 8.0 SDK
+    if (Test-Path "./dotnet-install.sh") {
+        Remove-Item "./dotnet-install.sh" -Force
+    }
+    
+    Write-Host "   Downloading dotnet-install.sh..." -ForegroundColor Gray
+    Invoke-WebRequest -Uri "https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh" -OutFile "./dotnet-install.sh"
+    
+    Write-Host "   Making script executable..." -ForegroundColor Gray
+    chmod +x ./dotnet-install.sh
+    
+    Write-Host "   Installing .NET 8.0.404 SDK..." -ForegroundColor Gray
+    ./dotnet-install.sh -version 8.0.404
+    
+    # Add to PATH
+    $env:PATH = "$HOME/.dotnet:$env:PATH"
+    
+    # Verify installation
+    $dotnetVersionAfter = dotnet --list-sdks | Select-String "^8\.0\."
+    if ($dotnetVersionAfter) {
+        Write-Host "✅ .NET 8.0 SDK installed successfully: $dotnetVersionAfter" -ForegroundColor Green
+    } else {
+        Write-Host "❌ ERROR: .NET 8.0 SDK installation failed" -ForegroundColor Red
+        exit 1
+    }
+    
+    # Clean up installer
+    Remove-Item "./dotnet-install.sh" -Force
+} else {
+    Write-Host "✅ .NET 8.0 SDK already installed: $dotnetVersion" -ForegroundColor Green
+}
+
+Write-Host ""
+
 #Get TenantID if not set as argument
 $currentContext = az account show | ConvertFrom-Json
 $currentTenant = $currentContext.tenantId
