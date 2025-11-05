@@ -6,8 +6,8 @@
 #
 
 Param(  
-   [string][Parameter(Mandatory)]$WebAppNamePrefix, # Prefix used for creating web applications
-   [string][Parameter(Mandatory)]$ResourceGroupForDeployment # Name of the resource group to deploy the resources
+   [string]$WebAppNamePrefix = "sac-02", # Prefix used for creating web applications
+   [string]$ResourceGroupForDeployment = "rg-saasaccel-teams-gpt-02" # Name of the resource group to deploy the resources
 )
 
 # Define the message
