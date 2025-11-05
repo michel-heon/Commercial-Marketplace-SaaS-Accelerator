@@ -8,7 +8,7 @@
 }
 @{
     var dbg_ShowWelcome = Model?.ShowWelcomeScreen ?? true;
-    var dbg_Status = Model?.SubscriptionStatus?.ToString() ?? "NULL";
+    var dbg_Status = Model?.SubscriptionStatus.ToString() ?? "NULL";
     System.Diagnostics.Debug.WriteLine($"[LANDING-PAGE] ShowWelcome={dbg_ShowWelcome}, Status={dbg_Status}");
 }
 @if (!Model.ShowWelcomeScreen)
@@ -268,10 +268,6 @@
             }
 
                 <div class="text-end">
-                    @{
-                        var dbg_IsSubscribed = Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed;
-                        System.Diagnostics.Debug.WriteLine($"[INSTALLATION-CHECK] Status={Model.SubscriptionStatus}, WillRender={dbg_IsSubscribed}");
-                    }
                     @if (Model.SubscriptionStatus == SubscriptionStatusEnumExtension.Subscribed)
                     {
                         <button type="submit" asp-action="SubscriptionOperation" asp-route-subscriptionId="@Model.Id" asp-route-planId="@Model.PlanId" asp-route-operation="Deactivate" class="cm-button-danger text-right">Unsubscribe</button>
