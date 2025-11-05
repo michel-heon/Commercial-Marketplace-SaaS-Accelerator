@@ -113,10 +113,8 @@ deploy-cloudshell: ## Deploy Customer Portal from Azure Cloud Shell (x64 compati
 		echo "  2. Click Cloud Shell icon (>_) in top right"; \
 		echo "  3. Run the following commands:"; \
 		echo ""; \
-		echo "     cd /home/michel/Commercial-Marketplace-SaaS-Accelerator"; \
-		echo "     git pull origin main"; \
-		echo "     cd config"; \
-		echo "     make deploy-customer"; \
+		echo "     cd ~/Commercial-Marketplace-SaaS-Accelerator/config"; \
+		echo "     ./deploy-from-cloudshell.sh"; \
 		echo ""; \
 		read -p "Continue with local deployment anyway? (yes/no) " -r; \
 		echo ""; \
@@ -124,25 +122,30 @@ deploy-cloudshell: ## Deploy Customer Portal from Azure Cloud Shell (x64 compati
 			echo "Deployment cancelled."; \
 			exit 1; \
 		fi; \
-	else \
-		echo "✓ Running in Azure Cloud Shell"; \
-		echo ""; \
 	fi
-	@echo "Pulling latest code..."
-	@cd $(PROJECT_ROOT) && git pull origin main
-	@echo "✓ Code updated"
-	@echo ""
-	@$(MAKE) deploy-customer
-	@echo ""
-	@echo "═══════════════════════════════════════════════════════════════"
-	@echo "  Deployment Complete!"
-	@echo "═══════════════════════════════════════════════════════════════"
-	@echo ""
-	@echo "Next Steps:"
-	@echo "  1. Wait 30 seconds for app restart"
-	@echo "  2. Logout: https://$(CUSTOMER_WEBAPP).azurewebsites.net/Account/SignOut"
-	@echo "  3. Clear browser cookies (F12 > Application > Clear storage)"
-	@echo "  4. Test: https://$(CUSTOMER_WEBAPP).azurewebsites.net"
+	@if [ -f deploy-from-cloudshell.sh ]; then \
+		chmod +x deploy-from-cloudshell.sh; \
+		./deploy-from-cloudshell.sh; \
+	else \
+		echo "⚠️  Script deploy-from-cloudshell.sh not found!"; \
+		echo "   Falling back to standard deployment..."; \
+		echo ""; \
+		echo "Pulling latest code..."; \
+		cd $(PROJECT_ROOT) && git pull origin main; \
+		echo "✓ Code updated"; \
+		echo ""; \
+		$(MAKE) deploy-customer; \
+		echo ""; \
+		echo "═══════════════════════════════════════════════════════════════"; \
+		echo "  Deployment Complete!"; \
+		echo "═══════════════════════════════════════════════════════════════"; \
+		echo ""; \
+		echo "Next Steps:"; \
+		echo "  1. Wait 30 seconds for app restart"; \
+		echo "  2. Logout: https://$(CUSTOMER_WEBAPP).azurewebsites.net/Account/SignOut"; \
+		echo "  3. Clear browser cookies (F12 > Application > Clear storage)"; \
+		echo "  4. Test: https://$(CUSTOMER_WEBAPP).azurewebsites.net"; \
+	fi
 	@echo ""
 
 # Deploy Admin Portal
@@ -160,14 +163,6 @@ deploy-admin: package-admin ## Deploy Admin Portal to Azure
 # Deploy both portals
 deploy-all: deploy-customer deploy-admin ## Deploy both Customer and Admin Portals
 	@echo "✓ All portals deployed successfully"
-
-# Quick deploy customer (for development)
-quick-deploy: ## Quick deploy Customer Portal (local build - dev only)
-	@echo "⚠️  Quick deploy uses local build (may have compatibility issues)"
-	@echo "Quick deploy Customer Portal..."
-	@$(MAKE) deploy-customer
-	@echo "✓ Customer Portal deployed"
-	@echo "For production, use: make deploy-cloudshell"
 
 # Clean build artifacts
 clean: ## Clean build artifacts and packages
