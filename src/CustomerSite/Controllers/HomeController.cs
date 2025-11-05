@@ -280,10 +280,51 @@ public class HomeController : BaseController
                 }
                 else
                 {
-                    this.TempData["ShowWelcomeScreen"] = "True";
-                    subscriptionExtension.ShowWelcomeScreen = true;
-                    this.logger.Info($"[HOME-INDEX-END] Authenticated but no token - returning welcome screen. SubscriptionStatus = {subscriptionExtension.SubscriptionStatus}");
-                    return this.View(subscriptionExtension);
+                    // NO TOKEN - Check if user has existing subscriptions
+                    this.logger.Info($"[HOME-INDEX] No token present - checking for existing subscriptions for user: {this.CurrentUserEmailAddress}");
+                    
+                    var userIdFromEmail = this.userService.GetPartnerDetailFromEmail(this.CurrentUserEmailAddress);
+                    this.logger.Info($"[HOME-INDEX] GetPartnerDetailFromEmail returned: {(userIdFromEmail != null ? $"UserId={userIdFromEmail.UserId}, Email={userIdFromEmail.EmailAddress}" : "NULL")}");
+                    
+                    if (userIdFromEmail != null && userIdFromEmail.UserId > 0)
+                    {
+                        // User exists in DB - check for subscriptions
+                        var existingSubscriptions = this.subscriptionService.GetPartnerSubscription(this.CurrentUserEmailAddress, default, true).ToList();
+                        this.logger.Info($"[HOME-INDEX] Found {existingSubscriptions.Count} subscription(s) for user");
+                        
+                        if (existingSubscriptions.Any())
+                        {
+                            // User has subscriptions - show them instead of welcome screen
+                            subscriptionExtension.ShowWelcomeScreen = false;
+                            this.TempData["ShowWelcomeScreen"] = null;
+                            
+                            // Get first active subscription to display
+                            var firstSubscription = existingSubscriptions.FirstOrDefault();
+                            if (firstSubscription != null)
+                            {
+                                subscriptionExtension = firstSubscription;
+                                subscriptionExtension.CustomerEmailAddress = this.CurrentUserEmailAddress;
+                                subscriptionExtension.CustomerName = this.CurrentUserName;
+                                this.logger.Info($"[HOME-INDEX-END] Returning subscription details. ShowWelcomeScreen=false, SubscriptionStatus={subscriptionExtension.SubscriptionStatus}, SubscriptionId={subscriptionExtension.Id}");
+                            }
+                        }
+                        else
+                        {
+                            // User exists but no subscriptions - show welcome screen
+                            this.TempData["ShowWelcomeScreen"] = "True";
+                            subscriptionExtension.ShowWelcomeScreen = true;
+                            this.logger.Info($"[HOME-INDEX-END] User exists but no subscriptions - returning welcome screen");
+                            return this.View(subscriptionExtension);
+                        }
+                    }
+                    else
+                    {
+                        // User not found in DB - show welcome screen
+                        this.TempData["ShowWelcomeScreen"] = "True";
+                        subscriptionExtension.ShowWelcomeScreen = true;
+                        this.logger.Info($"[HOME-INDEX-END] User not found in database - returning welcome screen");
+                        return this.View(subscriptionExtension);
+                    }
                 }
             }
             else
