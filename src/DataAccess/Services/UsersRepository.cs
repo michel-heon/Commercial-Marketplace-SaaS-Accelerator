@@ -91,7 +91,7 @@ public class UsersRepository : IUsersRepository
     /// <returns> user details.</returns>
     public Users GetPartnerDetailFromEmail(string emailAddress)
     {
-        return this.context.Users.Where(s => s.EmailAddress == emailAddress).FirstOrDefault();
+        return this.context.Users.Where(s => s.EmailAddress.ToLower() == emailAddress.ToLower()).FirstOrDefault();
     }
 
     /// <summary>
